@@ -12,12 +12,12 @@ Vagrant.configure("2") do |config|
 
   # vagrant up tower --provider virtualbox
   config.vm.define "tower" do |tower|
-      config.vm.hostname = "tower.local"
+      config.vm.hostname = "tower.lab.local"
       tower.vm.box = "ansible/tower"
-      tower.vm.network :private_network, ip: "192.168.56.2"
+      tower.vm.network :private_network, ip: "192.168.56.102"
       tower.vm.provider :virtualbox do |v|
          v.gui = false
-         v.memory = 2048
+         v.memory = 1024
          v.cpus = 2
       end
   end
@@ -30,35 +30,35 @@ Vagrant.configure("2") do |config|
   # let's use vbox
   # TODO: let's refactor and build a function for god's sake
   config.vm.define "jenkins_box" do |jenkins|
-      config.vm.hostname = "jenkins.local"
-      jenkins.vm.network :private_network, ip: "192.168.56.3"
+      config.vm.hostname = "jenkins.lab.local"
+      jenkins.vm.network :private_network, ip: "192.168.56.103"
       jenkins.vm.provider :virtualbox do |v|
          v.gui = false
-         v.memory = 2048
+         v.memory = 512
       end
   end
     
   config.vm.define "sonar_box" do |sonar|
-    config.vm.hostname = "sonar.local"
-    sonar.vm.network :private_network, ip: "192.168.56.4"
+    config.vm.hostname = "sonar.lab.local"
+    sonar.vm.network :private_network, ip: "192.168.56.104"
     sonar.vm.provider :virtualbox do |v|
         v.gui = false
-        v.memory = 3000
+        v.memory = 512
     end
  end
 
   config.vm.define "nexus_box", primary: true do |nexus|
-    config.vm.hostname = "nexus.local"
-    nexus.vm.network :private_network, ip: "192.168.56.5"
+    config.vm.hostname = "nexus.lab.local"
+    nexus.vm.network :private_network, ip: "192.168.56.105"
     nexus.vm.provider :virtualbox do |v|
         v.gui = false
-        v.memory = 1024   
+        v.memory = 512   
     end
   end
 
   config.vm.define "app_box", primary: true do |app|
-      config.vm.hostname = "app.local"
-      app.vm.network :private_network, ip: "192.168.56.11"
+      config.vm.hostname = "app.lab.local"
+      app.vm.network :private_network, ip: "192.168.56.111"
       app.vm.provider :virtualbox do |v|
         v.gui = false
         v.memory = 512  
@@ -66,8 +66,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "app2_box", primary: true do |app2|
-      config.vm.hostname = "app2.local"
-      app2.vm.network :private_network, ip: "192.168.56.7"
+      config.vm.hostname = "app2.lab.local"
+      app2.vm.network :private_network, ip: "192.168.56.107"
       app2.vm.provider :virtualbox do |v|
          v.gui = false
          v.memory = 512
