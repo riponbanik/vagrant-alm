@@ -30,10 +30,9 @@ Vagrant.configure("2") do |config|
   # let's use vbox
   # TODO: let's refactor and build a function for god's sake
   config.vm.define "jenkins_box" do |jenkins|
-      config.vm.hostname = "jenkins.lab.local"
-      jenkins.vm.network :private_network, ip: "192.168.56.103"
+      config.vm.hostname = "jenkins.lab.local"      
 
-      jenkins.vm.provider "hyperv" do |h, override|
+      config.vm.provider "hyperv" do |h, override|
         h.cpus = 2
         h.memory = 512
         h.maxmemory = 1024
@@ -42,17 +41,16 @@ Vagrant.configure("2") do |config|
         override.vm.network "public_network"
       end   
       
-      jenkins.vm.provider :virtualbox do |v|
+      config.vm.provider :virtualbox do |v, override|
          v.gui = false
          v.memory = 512
+         override.vm.network :private_network, ip: "192.168.56.103"
       end
   end
     
   config.vm.define "sonar_box" do |sonar|
     config.vm.hostname = "sonar.lab.local"
-    sonar.vm.network :private_network, ip: "192.168.56.104"
-
-      sonar.vm.provider "hyperv" do |h, override|
+      config.vm.provider "hyperv" do |h, override|
         h.cpus = 2
         h.memory = 512
         h.maxmemory = 1024
@@ -61,15 +59,15 @@ Vagrant.configure("2") do |config|
         override.vm.network "public_network"
       end
 
-    sonar.vm.provider :virtualbox do |v|
+    config.vm.provider :virtualbox do |v, override|
         v.gui = false
-        v.memory = 512
+        v.memory = 1024
+        override.vm.network :private_network, ip: "192.168.56.104"
     end
  end
 
   config.vm.define "nexus_box", primary: true do |nexus|
-    nexus.vm.hostname = "nexus.lab.local"
-    nexus.vm.network :private_network, ip: "192.168.56.105"
+    config.vm.hostname = "nexus.lab.local"    
 
       config.vm.provider "hyperv" do |h, override|
         h.cpus = 2
@@ -80,17 +78,17 @@ Vagrant.configure("2") do |config|
         override.vm.network "public_network"
       end
 
-      nexus.vm.provider :virtualbox do |v|
+      config.vm.provider :virtualbox do |v, override|
           v.gui = false
           v.memory = 512   
+      override.vm.network :private_network, ip: "192.168.56.105"    
       end
   end
 
   config.vm.define "app_box", primary: true do |app|
-      config.vm.hostname = "app.lab.local"
-      app.vm.network :private_network, ip: "192.168.56.111"
+      config.vm.hostname = "app.lab.local"      
 
-      app.vm.provider "hyperv" do |h, override|
+      config.vm.provider "hyperv" do |h, override|
         h.cpus = 2
         h.memory = 512
         h.maxmemory = 1024
@@ -99,17 +97,17 @@ Vagrant.configure("2") do |config|
         override.vm.network "public_network"
       end
 
-      app.vm.provider :virtualbox do |v|
+      config.vm.provider :virtualbox do |v, override|
         v.gui = false
         v.memory = 512  
+        override.vm.network :private_network, ip: "192.168.56.111"
       end
   end
 
   config.vm.define "app2_box", primary: true do |app2|
-      config.vm.hostname = "app2.lab.local"
-      app2.vm.network :private_network, ip: "192.168.56.107"
+      config.vm.hostname = "app2.lab.local"      
 
-      app2.vm.provider "hyperv" do |h, override|
+      config.vm.provider "hyperv" do |h, override|
         h.cpus = 2
         h.memory = 512
         h.maxmemory = 1024
@@ -118,9 +116,10 @@ Vagrant.configure("2") do |config|
         override.vm.network "public_network"
       end
 
-      app2.vm.provider :virtualbox do |v|
+      config.vm.provider :virtualbox do |v, override|
          v.gui = false
          v.memory = 512
+         override.vm.network :private_network, ip: "192.168.56.107"
       end
   end
  
