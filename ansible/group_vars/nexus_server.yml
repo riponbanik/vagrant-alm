@@ -1,8 +1,8 @@
 nexus_version: '3.4.0-02'
-nexus_timezone: 'America/Sao_Paulo'
+nexus_timezone: 'Australia/Sydney'
 nexus_admin_password: 'admin123'
 nexus_anonymous_access: true
-public_hostname: 'nexus.local'
+public_hostname: 'nexus.lab.local'
 
 # nexus_local_users: []
 # example user item :

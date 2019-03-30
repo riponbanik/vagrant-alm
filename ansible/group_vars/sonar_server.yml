@@ -1,0 +1,2 @@
+ssl_certs_common_name: &ssl_certs_common_name 'sonar.lab.local'
+vhost_name: *ssl_certs_common_name

@@ -32,6 +32,16 @@ Vagrant.configure("2") do |config|
   config.vm.define "jenkins_box" do |jenkins|
       config.vm.hostname = "jenkins.lab.local"
       jenkins.vm.network :private_network, ip: "192.168.56.103"
+
+      jenkins.vm.provider "hyperv" do |h, override|
+        h.cpus = 2
+        h.memory = 512
+        h.maxmemory = 1024
+        h.enable_virtualization_extensions = true
+        h.linked_clone = false
+        override.vm.network "public_network"
+      end   
+      
       jenkins.vm.provider :virtualbox do |v|
          v.gui = false
          v.memory = 512
@@ -41,6 +51,16 @@ Vagrant.configure("2") do |config|
   config.vm.define "sonar_box" do |sonar|
     config.vm.hostname = "sonar.lab.local"
     sonar.vm.network :private_network, ip: "192.168.56.104"
+
+      sonar.vm.provider "hyperv" do |h, override|
+        h.cpus = 2
+        h.memory = 512
+        h.maxmemory = 1024
+        h.enable_virtualization_extensions = true
+        h.linked_clone = false
+        override.vm.network "public_network"
+      end
+
     sonar.vm.provider :virtualbox do |v|
         v.gui = false
         v.memory = 512
@@ -48,17 +68,37 @@ Vagrant.configure("2") do |config|
  end
 
   config.vm.define "nexus_box", primary: true do |nexus|
-    config.vm.hostname = "nexus.lab.local"
+    nexus.vm.hostname = "nexus.lab.local"
     nexus.vm.network :private_network, ip: "192.168.56.105"
-    nexus.vm.provider :virtualbox do |v|
-        v.gui = false
-        v.memory = 512   
-    end
+
+      config.vm.provider "hyperv" do |h, override|
+        h.cpus = 2
+        h.memory = 512
+        h.maxmemory = 1024
+        h.enable_virtualization_extensions = true
+        h.linked_clone = false
+        override.vm.network "public_network"
+      end
+
+      nexus.vm.provider :virtualbox do |v|
+          v.gui = false
+          v.memory = 512   
+      end
   end
 
   config.vm.define "app_box", primary: true do |app|
       config.vm.hostname = "app.lab.local"
       app.vm.network :private_network, ip: "192.168.56.111"
+
+      app.vm.provider "hyperv" do |h, override|
+        h.cpus = 2
+        h.memory = 512
+        h.maxmemory = 1024
+        h.enable_virtualization_extensions = true
+        h.linked_clone = false
+        override.vm.network "public_network"
+      end
+
       app.vm.provider :virtualbox do |v|
         v.gui = false
         v.memory = 512  
@@ -68,6 +108,16 @@ Vagrant.configure("2") do |config|
   config.vm.define "app2_box", primary: true do |app2|
       config.vm.hostname = "app2.lab.local"
       app2.vm.network :private_network, ip: "192.168.56.107"
+
+      app2.vm.provider "hyperv" do |h, override|
+        h.cpus = 2
+        h.memory = 512
+        h.maxmemory = 1024
+        h.enable_virtualization_extensions = true
+        h.linked_clone = false
+        override.vm.network "public_network"
+      end
+
       app2.vm.provider :virtualbox do |v|
          v.gui = false
          v.memory = 512

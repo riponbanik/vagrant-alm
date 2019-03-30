@@ -45,6 +45,14 @@
         path: "{{ sonar_path }}/sonarqube-{{ sonar_major_version }}.{{ sonar_minor_version }}/extensions/plugins"
         state: absent      
   roles:
+    - role: jdauphant.ssl-certs
+      tags:
+        - ssl
+      ssl_certs_common_name: "{{ vhost_name }}"
+      ssl_certs_path_owner: 'root'
+      ssl_certs_path_group: 'root'
+      ssl_certs_generate_self_signed: true
+
     - role: geerlingguy.java
     - role: ANXS.postgresql
       postgresql_users:
