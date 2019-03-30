@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
       
       config.vm.provider :virtualbox do |v, override|
          v.gui = false
-         v.memory = 512
+         v.memory = 1024
          override.vm.network :private_network, ip: "192.168.56.103"
       end
   end
@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
 
       config.vm.provider :virtualbox do |v, override|
           v.gui = false
-          v.memory = 512   
+          v.memory = 1024
       override.vm.network :private_network, ip: "192.168.56.105"    
       end
   end
